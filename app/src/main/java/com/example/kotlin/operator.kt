@@ -38,14 +38,14 @@ operator fun OP1.unaryPlus() = OP1(+ (value * 2))
 
 fun op_test1(){
 
-    var op1 = OP1(66)
+    val op1 = OP1(66)
 
     Log.e(TAG_OPERATOR,"op1 = $op1")
 
-    var fop1 = -op1
+    val fop1 = -op1
     Log.e(TAG_OPERATOR,"-op1 = $fop1")
 
-    var zop1 = +op1
+    val zop1 = +op1
     Log.e(TAG_OPERATOR,"+op1 = $zop1")
 
 }
@@ -61,7 +61,7 @@ data class OP2(var value : Int){
 
     override fun equals(other: Any?): Boolean {
         if (other !is OP2 || other == null ) return false
-        var op2 = other as OP2
+        val op2 = other as OP2
         return op2.value - this.value == 0
     }
 
@@ -72,7 +72,7 @@ operator fun OP2.dec() : OP2 = OP2(value - 10)
 
 fun op_test2(){
     var op2 = OP2(33)
-    var op3 = ++op2
+    val op3 = ++op2
 
     Log.e(TAG_OPERATOR,"op2 === op3 is ${op2 === op3} , op2 = $op2  op3 = $op3")
 }
@@ -98,13 +98,13 @@ fun op_test3(){
 
     Log.e(TAG_OPERATOR,"____op_test3___")
 
-    var op3 = OP3()
+    val op3 = OP3()
     Log.e(TAG_OPERATOR,"op3 = $op3")
 
     var ret = op3 + 5
     Log.e(TAG_OPERATOR,"op3 + 5 = $ret")
 
-    var op4 = OP3(100)
+    val op4 = OP3(100)
     Log.e(TAG_OPERATOR,"op4 = $op4")
 
     ret = op3 + op4
@@ -116,7 +116,7 @@ fun op_test3(){
 //4. in , [i]
 data class OP4(var array : Array<Int>){
     override fun toString(): String {
-        var sb = StringBuffer()
+        val sb = StringBuffer()
         for (value in array){
             sb.append(value.toString() + ",")
         }
@@ -149,12 +149,12 @@ operator fun OP4.get(i_1 : Int,i_2: Int,i_n: Int) : Int?{
 fun op_test4(){
     Log.e(TAG_OPERATOR,"____op_test4___")
 
-    var arr = arrayOf(1,3,6,8,9,5,20)
-    var op4 = OP4(array = arr)
+    val arr = arrayOf(1,3,6,8,9,5,20)
+    val op4 = OP4(array = arr)
 
     Log.e(TAG_OPERATOR,"op4 = $op4")
 
-    var x = 10000
+    val x = 10000
 
     if (x in op4){
         Log.e(TAG_OPERATOR,"$x in {$op4}")
@@ -186,11 +186,11 @@ fun op_test5(){
 
     Log.e(TAG_OPERATOR,"\n\n____op_test5___\n\n")
 
-    var op5 = OP5(1024)
+    val op5 = OP5(1024)
 
     op5()
 
-    var sum = op5(1 , 2)
+    val sum = op5(1 , 2)
 
     Log.e(TAG_OPERATOR,"op(1,2) = $sum")
 
@@ -231,7 +231,7 @@ data class OP7(var value: Int = 0){
 
 operator fun OP7.compareTo(op7 : OP7) : Int = this.value - op7.value
         operator fun OP7.compareTo(op7 : String) : Int {
-    var op7 = OP7(op7.toInt())
+            val op7 = OP7(op7.toInt())
     return this.value - op7.value
 }
 
@@ -239,7 +239,7 @@ operator fun OP7.compareTo(op7 : OP7) : Int = this.value - op7.value
 fun op_test7(){
     Log.e(TAG_OPERATOR,"\n\n____op_test7___\n\n")
 
-    var op7 = OP7(1000)
+    val op7 = OP7(1000)
     var compare = op7 > 7
     Log.e(TAG_OPERATOR,"op7 > 7 = $compare")
 

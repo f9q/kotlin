@@ -20,7 +20,7 @@ fun sealed_test(){
 //    sealed class S1e  //error,密封类不能是本地的
 //    var s1 = S1()     //error,一个密封类是自身抽象的，它不能直接实例化并可以有抽象（abstract）成员
 
-    var sf = SF(0.2f)
+    val sf = SF(0.2f)
 
     when(sf){
         is SF -> Log.e(TAG_SEALED," type is SF")

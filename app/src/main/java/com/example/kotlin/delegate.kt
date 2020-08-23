@@ -37,19 +37,19 @@ class base1Impl : __base1__ {
     }
 }
 
-class delegate1(var impl : __base1__) : __base1__ by impl
+class delegate1(val impl : __base1__) : __base1__ by impl
 
 
 fun delegate_test1(){
 
     Log.e(TAG_DELEGATE,"====================================== delegate_test_ 1 ")
 
-    var impl = base1Impl()
-    var delegate1 = delegate1(impl)
+    val impl        =   base1Impl()
+    val delegate1   =   delegate1(impl)
 
     delegate1.f2()
 
-    var d2 = delegate1(object : __base1__{
+    val d2 = delegate1(object : __base1__{
         override fun f2() {
             Log.e(TAG_DELEGATE,"delegate1.companion.impl.f2()")
         }
@@ -66,7 +66,7 @@ open class delegate_sub1 : deleagte_base2()
 abstract class AB1{
     abstract fun f1()
 }
-//class D2 (var ab : AB1) : AB1 by ab         //error,抽象类也不可以委托。
+//class D2 (val ab : AB1) : AB1 by ab         //error,抽象类也不可以委托。
 
 fun delegate_test2(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_ 2 ")
@@ -93,9 +93,9 @@ fun delegate_test3(){
 
     Log.e(TAG_DELEGATE,"====================================== delegate_test_ 3 ")
 
-    var im3 = I3Impl()
+    val im3 = I3Impl()
 
-    var delegate3 = delegate3(im3)
+    val delegate3 = delegate3(im3)
 
     delegate3.f3()
 
@@ -123,14 +123,14 @@ class delegate4{
         false   //return false 表示不接受修改，本次修改被否决
     }
 
-    var str : String by Delegates.notNull()     //在未初始化前使用，IllegalStateException。
+    val str : String by Delegates.notNull()     //在未初始化前使用，IllegalStateException。
 
 }
 
 fun delegate_test4(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_ 4 ")
 
-    var d4 = delegate4()
+    val d4 = delegate4()
 
     d4.value = 99
 
@@ -196,12 +196,12 @@ class D9(val map8 : Map<String,Any?>){
     val name    : String    by map8
     val id      : Int       by map8
 
-    var T = 200
-    //var age     : Int       by T        //error,Int 并没有提供委托函数。
+    val T = 200
+    //val age     : Int       by T        //error,Int 并没有提供委托函数。
     var age : Int  = T
 
-    var mmap = mutableMapOf<String,Any?>()
-    var desc : String by mmap
+    val mmap = mutableMapOf<String,Any?>()
+    val desc : String by mmap
 
     init{
         mmap.put("desc","done")
@@ -220,13 +220,13 @@ class D9(val map8 : Map<String,Any?>){
 
 fun delegate_test9(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_9 ")
-    var map = mutableMapOf<String,Any?>(
+    val map = mutableMapOf<String,Any?>(
         "name"  to "sia"
         ,"age"  to 12
         ,"id"   to  3
     )
 
-    var d9 = D9(map)
+    val d9 = D9(map)
 
     Log.e(TAG_DELEGATE,"d9 = $d9")
 
@@ -255,7 +255,7 @@ fun example(compute : () -> Int) : Int{
 fun delegate_test10(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_10 ")
 
-    var v = example(::getMem)
+    val v = example(::getMem)
 
     Log.e(TAG_DELEGATE,"v = $v")
 }
@@ -267,18 +267,18 @@ fun delegate_test10(){
 //例如，对于属性 prop，生成隐藏属性 prop$delegate，而访问器的代码只是简单地委托给这个附加属性
 /*
 class C {
-    var prop: Type by MyDelegate()
+    val prop: Type by MyDelegate()
 }
 
 // 这段是由编译器生成的相应代码：
 class C {
     private val prop$delegate = MyDelegate()
-    var prop: Type
+    val prop: Type
         get() = prop$delegate.getValue(this, this::prop)
     set(value: Type) = prop$delegate.setValue(this, this::prop, value)
 }
 */
-class lazy11(var default : Int = -1,var lmda : () -> Int) {
+class lazy11(val default : Int = -1,val lmda : () -> Int) {
     operator fun provideDelegate( thisRef : Any,prop : KProperty<*>) : Delegate13 {
         return Delegate13(lmda)
     }
@@ -289,17 +289,17 @@ val i11 by lazy { 1 }
 class D11{
     val MAX by lazy { 1024 }
 
-    var lazy = lazy{ 9 }
+    val lazy = lazy{ 9 }
     val value : Int by lazy
 
-    var lazy11 = lazy11{8}
-    var count : Int by lazy11
+    val lazy11 = lazy11{8}
+    val count : Int by lazy11
 }
 
 fun delegate_test11(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_11 ")
 
-    var d11 = D11()
+    val d11 = D11()
     Log.e(TAG_DELEGATE,"d11.value = ${d11.value},d11.count = ${d11.count} ,d11.MAX = ${d11.MAX}")
 }
 
@@ -354,16 +354,16 @@ fun getNum() : Int{
 
 class DC12{
     var value   : Int by MyDelegate()
-    var value2  : Int by MyDelegate(::getNum)
+    val value2  : Int by MyDelegate(::getNum)
 }
 
 fun delegate_test12(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_12 ")
-    var d12 = D12()
+    val d12 = D12()
     d12.size = 128
     Log.e(TAG_DELEGATE,"d12.size = ${d12.size}")
 
-    var dc12 = DC12()
+    val dc12 = DC12()
     dc12.value = 64
     Log.e(TAG_DELEGATE,"dc12.value = ${dc12.value},dc12.value2 = ${dc12.value2}")
 }
@@ -402,7 +402,7 @@ class D13{
 fun delegate_test13(){
     Log.e(TAG_DELEGATE,"====================================== delegate_test_13 ")
 
-    var d13 = D13()
+    val d13 = D13()
     Log.e(TAG_DELEGATE,"d13.value = ${d13.value}")
 
     d13.value = 299

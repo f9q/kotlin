@@ -79,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         companion_test()
 
         delegate_test()
+
+        scope_test()
     }
 
 
