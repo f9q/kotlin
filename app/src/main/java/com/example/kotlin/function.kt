@@ -211,7 +211,7 @@ fun f6(age : Int = 19,id : Int = 0,name : String = "li",vararg args : String){
     }
 }
 fun f6(vararg args : String){
-    var sz = args.size
+    val sz = args.size
     Log.e(TAG,"f6(vararg args : String)")
 
     Log.e(TAG,"there are $sz args")

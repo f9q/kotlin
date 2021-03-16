@@ -201,14 +201,13 @@ fun testRun(){
     Log.e(ScopeTAG,"testRun 全局函数版: i3 = $i3 (122 * 2 + 23 + 34)")
 
     //2.扩展函数版本
-    class A(var name : String)
+    class A(var name : String){ fun query() : String = "name = $name" }
 
-    val r1 = A("null")
-    Log.e(ScopeTAG,"testRun r1.name = ${r1.name}")
-    r1.run {
+    val result = A("null").run {
         this.name = "r1"
-        Log.e(ScopeTAG,"testRun name = $name")
+        query()
     }
+    Log.e(ScopeTAG,"testRun result = $result")
 
 }
 

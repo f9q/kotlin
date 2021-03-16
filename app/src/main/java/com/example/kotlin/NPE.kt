@@ -17,8 +17,8 @@ fun npe_test(){
 }
 
 fun npe_test1(){
-    var s1 : String = "abc"
-    var s2 : String? = "abc"
+    val s1 : String = "abc"
+    val s2 : String? = "abc"
 
     //s1 = null                 //error,声明时不可为空。
 
@@ -42,9 +42,9 @@ fun npe_test2(){
 
 //3.Elvis 操作符.当且仅当左侧为空时，才会对右侧表达式求值。
 fun npe_test3(){
-    var str1 : String? = null
+    val str1 : String? = null
 
-    var ch0 = str1?.get(0) ?: getCh0()
+    val ch0 = str1?.get(0) ?: getCh0()
 
     Log.e(TAG_NPE,"ch0 = $ch0")
 
@@ -60,22 +60,24 @@ fun getCh0() : NPE{
 //4.非空断言运算符  !!  ,如果空，那么抛异常
 
 fun npe_test4(){
-    var str1 : String? = null
+    val str1 : String? = null
 
     try {
 
-        var len = str1!!.length
+        val len = str1!!.length
 
         Log.e(TAG_NPE,"len = $len")
     }catch (ex : KotlinNullPointerException){
         Log.e(TAG_NPE,"len = -1, caught a exception = " + ex.message)
+    }catch (e : Exception){
+        Log.e(TAG_NPE,"caught a exception = " + e.message)
     }
 }
 
 //5.安全的类型转换
 fun npe_test5(){
-    var npe = NPE()
-    var value = npe as? Int
+    val npe = NPE()
+    val value = npe as? Int
 
     Log.e(TAG_NPE,"value = $value")
 
@@ -94,13 +96,13 @@ fun npe_test6(){
         Log.e(TAG_NPE,"value = " + int)
     }
 
-    var array = arrayOf(1,2,null,"We",2.0f)
+    val array = arrayOf(1,2,null,"We",2.0f)
 
-    var noNullArray = array.filterNotNull()
+    val noNullArray = array.filterNotNull()
     for (i in nullableList.indices){
         Log.e(TAG_NPE, "noNullArray[$i] = ${noNullArray[i]}")
     }
-    var intArr = array.filterNot { any : Any? ->  any !is Int }
+    val intArr = array.filterNot { any : Any? ->  any !is Int }
     for (i in intArr.indices){
         Log.e(TAG_NPE,"intArr[$i] = ${intArr[i]}")
     }

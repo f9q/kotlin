@@ -81,6 +81,12 @@ class MainActivity : AppCompatActivity() {
         delegate_test()
 
         scope_test()
+
+        vararg_test()
+
+        infix_test()
+
+        tailrec_test()
     }
 
 

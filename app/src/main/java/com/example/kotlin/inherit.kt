@@ -105,8 +105,8 @@ inline fun inline_fun(){
 
     Log.e(TAG_INHERIT,"-----====----====-----")
     var b1 = B1()
-    var d1 = D1()
-    var d2 = D1()
+    val d1 = D1()
+    val d2 = D1()
 
 //    d2 = b1   //error 子类不能指向父类
     b1 = d1
